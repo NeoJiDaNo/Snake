@@ -61,7 +61,18 @@ function createMouse() {
 
  let direction = 'right';
  let steps = false;
- 
+
+ let input = document.createElement('input');
+ document.body.appendChild(input);
+ input.style.cssText = `
+ margin: auto;
+ margin-top: 40px;
+ font-size: 30px;
+ display:block;
+ `;
+
+ let score = 0;
+ input.value = `Ваши очки: ${score}`;
 
  function move() {
     let snakeCoordinates = [snakeBody[0].getAttribute('posX'), snakeBody[0].getAttribute('posY')];
@@ -103,6 +114,8 @@ function createMouse() {
         let b = snakeBody[snakeBody.length - 1].getAttribute('posY');
         snakeBody.push(document.querySelector('[posX = "' + a + '"][posY = "' + b + '"]'));
         createMouse();
+        score++;
+        input.value = `Ваши очки: ${score}`;
     }
 
     if (snakeBody[0].classList.contains('snakeBody')) {
